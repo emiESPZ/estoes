@@ -143,8 +143,9 @@ const EditProject = () => {
               <option value='' disabled selected>
                 Select a person
               </option>
-              <option>Bart Simpson</option>
-              <option>Lisa Simpson</option>
+              {usersList.map((user) => (
+                <option key={user.id}>{user.name}</option>
+              ))}
             </Form.Select>
           </FormGroup>
           <FormGroup className='ms-3 me-3'>
@@ -159,8 +160,9 @@ const EditProject = () => {
               <option value='' disabled selected>
                 Select a person
               </option>
-              <option>Homer Simpson</option>
-              <option>Marge Simpson</option>
+              {usersList.map((user) => (
+                <option key={user.id}>{user.name}</option>
+              ))}
             </Form.Select>
           </FormGroup>
           <FormGroup className='ms-3 me-3'>
