@@ -55,7 +55,7 @@
 
 .menu-icon {
   position: absolute;
-  margin-left: 18rem;
+  margin-left: 92%;
   margin-top: -1.4rem;
 }
 
@@ -188,23 +188,19 @@ ul li {
 
 @media (min-width: 700px) {
   .full-container {
-    width: 50%;
+    width: 95%;
     margin-left: auto;
     margin-right: auto;
   }
-  .menu-icon {
-    margin-left: 56rem;
-  }
+
   .project-name {
     font-size: 22px;
+    margin-top: 0.5rem;
   }
   .name {
     font-size: 18px;
   }
   .menu-options {
     margin-left: 43.5rem;
-  }
-  .project-name {
-    margin-top: 0.5rem;
   }
 }
