@@ -83,23 +83,27 @@ const EditProject = () => {
       <div className='projectsContainer' key={projects.projectId}>
         <div className='nav-text container'>
           <Link to='/'>
-            <FontAwesomeIcon className='arrow' icon={faArrowLeft} />
+            <FontAwesomeIcon
+              className='arrow'
+              style={{ marginLeft: '2px' }}
+              icon={faArrowLeft}
+            />
           </Link>
           <Link style={{ textDecoration: 'none' }} to='/'>
             <p className='add-project-text'>
               <p
                 style={{
-                  marginLeft: '-24rem',
+                  marginLeft: '-26rem',
                   fontFamily: 'Inter',
                   fontStyle: 'normal',
                   fontWeight: '400',
                   fontSize: '12px',
-                  marginTop: '0.3rem',
+                  marginTop: '0.9rem',
                 }}
               >
                 Back
               </p>
-              <p style={{ marginTop: '-2.3rem', marginLeft: '-16rem' }}>
+              <p style={{ marginTop: '-2.3rem', marginLeft: '-18rem' }}>
                 Project List
               </p>
             </p>

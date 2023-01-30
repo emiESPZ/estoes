@@ -56,7 +56,16 @@ const ProjectList = () => {
       <div className='full-container'>
         <div className='nav-text'>
           <Link className='link' to='/'>
-            <p className='add-project-text'>My Projects</p>
+            <p
+              className='add-project-text'
+              style={{
+                maxWidth: '500px',
+                fontSize: '16px',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              My Projects
+            </p>
           </Link>
           <Button
             className='ms-3 me-3 btn add-project-button'
