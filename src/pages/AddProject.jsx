@@ -62,33 +62,27 @@ const AddProject = () => {
   return (
     <>
       <div className='projectsContainer' key={formData.projectId}>
-        <div className='nav-text container'>
+        <div className='nav-text'>
           <Link to='/'>
             <FontAwesomeIcon
               className='arrow'
-              style={{ marginLeft: '2px' }}
+              style={{ fontSize: '20px' }}
               icon={faArrowLeft}
             />
           </Link>
-          <Link style={{ textDecoration: 'none' }} to='/'>
-            <p className='add-project-text'>
-              <p
-                style={{
-                  marginLeft: '-26rem',
-                  fontFamily: 'Inter',
-                  fontStyle: 'normal',
-                  fontWeight: '400',
-                  fontSize: '12px',
-                  marginTop: '0.9rem',
-                }}
-              >
-                Back
-              </p>
-              <p style={{ marginTop: '-2.3rem', marginLeft: '-18rem' }}>
-                Project List
-              </p>
-            </p>
-          </Link>
+
+          <div className='text-nav'>
+            <Link
+              className='back-text'
+              style={{ textDecoration: 'none' }}
+              to='/'
+            >
+              <p>Back</p>
+            </Link>
+            <Link style={{ textDecoration: 'none' }} to='/'>
+              <p className='edit-project'>Add Project</p>
+            </Link>
+          </div>
         </div>
         <div className='separadorGrueso'></div>
         <Form className='mt-4 form' onSubmit={handleSubmit}>

@@ -81,33 +81,27 @@ const EditProject = () => {
   return (
     <>
       <div className='projectsContainer' key={projects.projectId}>
-        <div className='nav-text container'>
+        <div className='nav-text'>
           <Link to='/'>
             <FontAwesomeIcon
               className='arrow'
-              style={{ marginLeft: '2px' }}
+              style={{ fontSize: '20px' }}
               icon={faArrowLeft}
             />
           </Link>
-          <Link style={{ textDecoration: 'none' }} to='/'>
-            <p className='add-project-text'>
-              <p
-                style={{
-                  marginLeft: '-26rem',
-                  fontFamily: 'Inter',
-                  fontStyle: 'normal',
-                  fontWeight: '400',
-                  fontSize: '12px',
-                  marginTop: '0.9rem',
-                }}
-              >
-                Back
-              </p>
-              <p style={{ marginTop: '-2.3rem', marginLeft: '-18rem' }}>
-                Project List
-              </p>
-            </p>
-          </Link>
+
+          <div className='text-nav'>
+            <Link
+              className='back-text'
+              style={{ textDecoration: 'none' }}
+              to='/'
+            >
+              <p>Back</p>
+            </Link>
+            <Link style={{ textDecoration: 'none' }} to='/'>
+              <p className='edit-project'>Edit Project</p>
+            </Link>
+          </div>
         </div>
         <div className='separadorGrueso'></div>
         <Form className='mt-4 form' onSubmit={handleSubmit}>
@@ -191,7 +185,7 @@ const EditProject = () => {
             </Button>
           ) : (
             <Button
-              className='ms-3 me-3'
+              className='ms-3 me-3 btn'
               type='submit'
               style={{
                 backgroundColor: 'rgba(245, 34, 45, 1)',
