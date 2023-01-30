@@ -66,6 +66,7 @@
   width: 98px;
   height: 32px;
   margin-bottom: 26px;
+  white-space: nowrap;
 }
 
 .user-pic {
@@ -199,5 +200,11 @@ ul li {
   }
   .name {
     font-size: 18px;
+  }
+  .menu-options {
+    margin-left: 43.5rem;
+  }
+  .project-name {
+    margin-top: 0.5rem;
   }
 }
