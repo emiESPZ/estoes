@@ -24,7 +24,7 @@ const EditProject = () => {
   const [valueState, setValueState] = useState(true);
   const [dataFetched, setDataFetched] = useState(false);
   const { id } = useParams();
-  console.log(id);
+
   const [formData, setFormData] = useState({
     projectName: '',
     projectDescription: '',
@@ -58,6 +58,7 @@ const EditProject = () => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
     setValueState(false);
+    console.log(formData);
   };
 
   useEffect(() => {
@@ -68,7 +69,6 @@ const EditProject = () => {
 
       if (docSnap.exists()) {
         setProjects(docSnap.data());
-        console.log(docSnap.data());
       } else {
         // doc.data() will be undefined in this case
         console.log('No such document!');
@@ -111,7 +111,7 @@ const EditProject = () => {
               className='mb-3 '
               type='text'
               placeholder='Enter text'
-              value={projects.projectName}
+              value={valueState ? projects.projectName : formData.projectName}
               name='projectName'
               disabled={disabledInputs}
               onChange={handleChange}
