@@ -5,7 +5,6 @@
   background-color: #f0f2f5;
 }
 .nav-text {
-  margin-bottom: 2rem;
   justify-content: space-between;
   font-family: 'Inter', sans-serif;
 }
@@ -126,7 +125,7 @@ ul li {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 6.2rem;
+  margin-left: 34%;
   margin-top: -0.5rem;
   background-color: white;
   z-index: 2;

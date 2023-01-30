@@ -77,6 +77,7 @@ const ProjectList = () => {
             <p style={{ fontSize: '12px' }}>+ Add Project</p>
           </Button>
         </div>
+        <div className='separadorGrueso'></div>
         <div className='card-project-container'>
           {data.map((project, index) => (
             <div className='project-card' key={project.projectId}>

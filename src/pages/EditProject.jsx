@@ -117,7 +117,7 @@ const EditProject = () => {
               className='mb-3 '
               type='text'
               placeholder='Enter text'
-              value={valueState ? projects.projectName : formData.projectName}
+              value={projects.projectName}
               name='projectName'
               disabled={disabledInputs}
               onChange={handleChange}
