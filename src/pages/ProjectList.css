@@ -81,6 +81,7 @@
   line-height: 22px;
   margin-left: 2rem;
 }
+
 .project-data {
   margin-left: 0.7rem;
 }
@@ -201,6 +202,10 @@ ul li {
   .menu-options {
     margin-left: 28rem;
   }
+}
+.project-card {
+  min-height: 5.8rem;
+  max-height: 5.8rem;
 }
 
 @media (min-width: 370px) {

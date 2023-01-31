@@ -9,7 +9,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
 import './AddProject.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { db } from '../API/firebase';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
@@ -35,7 +35,6 @@ const AddProject = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    localStorage.setItem('formData', JSON.stringify(formData));
     if (
       formData.projectName !== '' &&
       formData.projectDescription !== '' &&

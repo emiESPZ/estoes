@@ -44,6 +44,7 @@ const ProjectList = () => {
           projects.push(doc.data());
 
           setData(projects);
+          console.log(projects);
           let timestamp = doc.data().createdAt;
         });
       });
@@ -138,17 +139,19 @@ const ProjectList = () => {
                     }`}
                   </p>
                 </div>
-                <p className='name'>{project.projectAssignedTo}</p>
-                {
-                  <img
-                    className='user-pic'
-                    src={
-                      usersList.find(
-                        (user) => user.name === project.projectAssignedTo
-                      )?.pictureURL
-                    }
-                  />
-                }
+                <div className='user-data'>
+                  <p className='name'>{project.projectAssignedTo}</p>
+                  {
+                    <img
+                      className='user-pic'
+                      src={
+                        usersList.find(
+                          (user) => user.name === project.projectAssignedTo
+                        )?.pictureURL
+                      }
+                    />
+                  }
+                </div>
               </div>
             </div>
           ))}

@@ -7,7 +7,14 @@ import {
   FormLabel,
 } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
 import { db } from '../API/firebase';
 import { Link, useParams } from 'react-router-dom';
 import { uuidv4 } from '@firebase/util';
@@ -22,7 +29,7 @@ const EditProject = () => {
   const [disabledInputs, setDisabledInputs] = useState(true);
   const [buttonState, setButtonState] = useState(true);
   const [valueState, setValueState] = useState(true);
-  const [dataFetched, setDataFetched] = useState(false);
+  const [newFormatData, setNewFormatData] = useState({});
   const { id } = useParams();
 
   const [formData, setFormData] = useState({
@@ -34,53 +41,50 @@ const EditProject = () => {
     projectId: uuidv4(),
   });
 
-  const handleSubmit = (event) => {
+  const handleEdit = (event) => {
     event.preventDefault();
+
     setDisabledInputs(false);
     setButtonState(false);
   };
 
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+    setValueState(false);
+  };
+  useEffect(() => {
+    //Funcion asincrona, dentro el codigo para obtener todos los documentos de la coleccion de firebase.
+    async function fetchData() {
+      const projectRef = doc(db, 'projects', id);
+      const project = await getDoc(projectRef);
+      setFormData(project.data());
+
+      setValueState(false);
+    }
+    //Ejecuto la funcion fetchData
+    fetchData();
+  }, [id]);
+
   const handleSave = async (event) => {
-    event.preventDefault();
-    localStorage.setItem('formData', JSON.stringify(formData));
-    await setDoc(doc(db, 'projects', formData.projectId), {
-      projectName: formData.projectName,
+    const projectRef = doc(db, 'projects', formData.projectId);
+
+    // Set the "capital" field of the city 'DC'
+    await updateDoc(projectRef, {
+      projectAssignedTo: formData.projectAssignedTo,
       projectDescription: formData.projectDescription,
       projectManager: formData.projectManager,
-      projectAssignedTo: formData.projectAssignedTo,
+      projectName: formData.projectName,
       projectStatus: formData.projectStatus,
       projectId: formData.projectId,
     });
+
     setDisabledInputs(true);
 
     setButtonState(true);
   };
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-    setValueState(false);
-    console.log(formData);
-  };
-
-  useEffect(() => {
-    //Funcion asincrona, dentro el codigo para obtener todos los documentos de la coleccion de firebase.
-    async function fetchData() {
-      const docRef = doc(db, 'projects', id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setProjects(docSnap.data());
-      } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document!');
-      }
-    }
-    //Ejecuto la funcion fetchData
-    fetchData();
-  }, []);
-  console.log(projects);
   return (
     <>
-      <div className='projectsContainer' key={projects.projectId}>
+      <div className='projectsContainer' key={formData.projectId}>
         <div className='nav-text'>
           <Link to='/'>
             <FontAwesomeIcon
@@ -104,14 +108,16 @@ const EditProject = () => {
           </div>
         </div>
         <div className='separadorGrueso'></div>
-        <Form className='mt-4 form' onSubmit={handleSubmit}>
+        <Form className='mt-4 form'>
           <FormGroup className='ms-3 me-3'>
             <FormLabel className='formLabel mb-1'>Project Name</FormLabel>
             <FormControl
               className='mb-3 '
               type='text'
               placeholder='Enter text'
-              value={valueState ? projects.projectName : formData.projectName}
+              value={
+                valueState ? newFormatData.projectName : formData.projectName
+              }
               name='projectName'
               disabled={disabledInputs}
               onChange={handleChange}
@@ -123,7 +129,12 @@ const EditProject = () => {
               className='mb-3'
               type='text'
               placeholder='Enter text'
-              value={projects.projectDescription}
+              /* value={projects.projectDescription} */
+              value={
+                valueState
+                  ? newFormatData.projectDescription
+                  : formData.projectDescription
+              }
               name='projectDescription'
               disabled={disabledInputs}
               onChange={handleChange}
@@ -134,7 +145,10 @@ const EditProject = () => {
             <Form.Select
               className='mb-3'
               name='projectManager'
-              value={projects.projectManager}
+              /*  value={projects.projectManager} */
+              value={
+                valueState ? projects.projectManager : formData.projectManager
+              }
               disabled={disabledInputs}
               onChange={handleChange}
             >
@@ -151,7 +165,12 @@ const EditProject = () => {
             <Form.Select
               className='mb-3'
               name='projectAssignedTo'
-              value={projects.projectAssignedTo}
+              /* value={projects.projectAssignedTo} */
+              value={
+                valueState
+                  ? projects.projectAssignedTo
+                  : formData.projectAssignedTo
+              }
               disabled={disabledInputs}
               onChange={handleChange}
             >
@@ -167,7 +186,10 @@ const EditProject = () => {
             <FormLabel className='formLabel mb-1'>Status</FormLabel>
             <Form.Select
               name='projectStatus'
-              value={projects.projectStatus}
+              /* value={projects.projectStatus} */
+              value={
+                valueState ? projects.projectStatus : formData.projectStatus
+              }
               disabled={disabledInputs}
               onChange={handleChange}
             >
@@ -180,13 +202,13 @@ const EditProject = () => {
               className='ms-3 me-3'
               type='submit'
               style={{ backgroundColor: '#f5222d' }}
+              onClick={handleEdit}
             >
               Edit Project
             </Button>
           ) : (
             <Button
               className='ms-3 me-3 btn'
-              type='submit'
               style={{
                 backgroundColor: 'rgba(245, 34, 45, 1)',
                 border: 'none',
